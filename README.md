@@ -23,32 +23,11 @@ The following API routes are available for user management:
 
 ## Project Structure
 
-project-root/
-│
-├── src/
-│   ├── config/
-│   │   ├── database.js        # Database configuration and connection
-│   │   └── server.js          # Server configuration
-│   │
-│   ├── controllers/
-│   │   └── userController.js  # Handles requests, responses, and API logic for users
-│   │
-│   ├── middleware/
-│   │   ├── errorHandler.js    # Global error handler middleware
-│   │   └── validators.js      # Validation logic for incoming data
-│   │
-│   ├── models/
-│   │   └── userModel.js       # Mongoose/ORM model for User schema
-│   │
-│   ├── routes/
-│   │   ├── index.js           # Main route entry point
-│   │   └── userRoutes.js      # Routes related to user operations
-│   │
-│   ├── services/
-│   │   └── userService.js     # Business logic for user operations
-│   │
-│   └── app.js                 # Main application entry point
-│
-├── .env                       # Environment variables (e.g., database credentials)
-├── .gitignore                 # Files to be ignored by Git
-└── package.json               # Project dependencies and scripts
+	•	config/: Contains configuration files such as the database connection and server settings.
+	•	controllers/: Contains the logic for handling incoming requests and returning responses.
+	•	middleware/: Contains custom middleware such as validators and error handling.
+	•	models/: Defines the data schema for the User entity.
+	•	routes/: Defines the API routes and ties them to the corresponding controller methods.
+	•	services/: Contains business logic and services, such as database interactions.
+	•	app.js: The main application file that ties everything together and starts the server.
+
