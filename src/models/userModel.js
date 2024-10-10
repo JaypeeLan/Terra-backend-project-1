@@ -1,39 +1,42 @@
-const db = require("../config/database");
+// /models/userModel.js
+const mongoose = require("mongoose");
 
-class User {
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+});
+
+const User = mongoose.model("User", userSchema);
+
+class UserModel {
   static async findAll() {
-    const [rows] = await db.query("SELECT * FROM users");
-    return rows;
+    return await User.find();
   }
 
   static async findById(id) {
-    const [rows] = await db.query("SELECT * FROM users WHERE id = ?", [id]);
-    return rows[0];
+    return await User.findById(id);
   }
 
   static async create(userData) {
-    const { name, email } = userData;
-    const [result] = await db.query(
-      "INSERT INTO users (name, email) VALUES (?, ?)",
-      [name, email]
-    );
-    return { id: result.insertId, name, email };
+    const user = new User(userData);
+    await user.save();
+    return user;
   }
 
   static async update(id, userData) {
-    const { name, email } = userData;
-    await db.query("UPDATE users SET name = ?, email = ? WHERE id = ?", [
-      name,
-      email,
-      id,
-    ]);
-    return { id, name, email };
+    return await User.findByIdAndUpdate(id, userData, { new: true });
   }
 
   static async delete(id) {
-    const [result] = await db.query("DELETE FROM users WHERE id = ?", [id]);
-    return result.affectedRows > 0;
+    return await User.findByIdAndDelete(id);
   }
 }
 
-module.exports = User;
+module.exports = UserModel;

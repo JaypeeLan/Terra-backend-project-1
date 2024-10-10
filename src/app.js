@@ -5,10 +5,14 @@ const rateLimit = require("express-rate-limit");
 const { errorHandler } = require("./middleware/errorHandler");
 const routes = require("./routes");
 const { port, nodeEnv, apiPrefix } = require("./config/server");
+const connectDB = require("./config/database");
 
 const app = express();
 
-// Security middleware
+require("dotenv").config();
+
+connectDB();
+
 app.use(helmet());
 
 // Request logging
@@ -26,10 +30,8 @@ app.use(limiter);
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 
-// Routes
 app.use(apiPrefix, routes);
 
-// Error handling
 app.use(errorHandler);
 
 // Start server

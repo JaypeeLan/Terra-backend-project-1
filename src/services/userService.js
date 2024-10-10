@@ -1,3 +1,4 @@
+// /services/userService.js
 const User = require("../models/userModel");
 const { AppError } = require("../middleware/errorHandler");
 

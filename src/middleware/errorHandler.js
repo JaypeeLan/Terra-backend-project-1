@@ -3,13 +3,21 @@ const errorHandler = (err, req, res, next) => {
 
   if (err.name === "ValidationError") {
     return res.status(400).json({
-      status: "error",
-      message: err.message,
+      status: "fail",
+      message: "Invalid input data",
       errors: err.errors,
     });
   }
 
-  res.status(err.status || 500).json({
+  // For AppError
+  if (err.isOperational) {
+    return res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message,
+    });
+  }
+
+  res.status(err.statusCode || 500).json({
     status: "error",
     message: err.message || "Internal server error",
   });
