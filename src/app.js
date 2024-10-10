@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
@@ -8,8 +9,6 @@ const { port, nodeEnv, apiPrefix } = require("./config/server");
 const connectDB = require("./config/database");
 
 const app = express();
-
-require("dotenv").config();
 
 connectDB();
 
