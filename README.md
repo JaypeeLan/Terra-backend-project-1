@@ -31,3 +31,17 @@ The following API routes are available for user management:
 	•	services/: Contains business logic and services, such as database interactions.
 	•	app.js: The main application file that ties everything together and starts the server.
 
+## How to Run the Project
+
+### 1. Clone the Repository
+```bash
+git clone <repository_url>
+cd terra-bootcamp
+npm install
+NODE_ENV=development
+PORT=9090
+DB_HOST=localhost
+MONGO_URI=<your_mongodb_uri>
+npm run dev
+```
+
